@@ -19,6 +19,7 @@ jobs:
       - image: node:10.16.0-alpine
     steps:
         - checkout
+        - run: npm run install
         - run: npm run lint
         - run: npm run check
         - run: npm run test
