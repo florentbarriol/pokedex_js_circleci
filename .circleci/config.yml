@@ -11,11 +11,16 @@ jobs:
         - run: npm run test
 
   deploy:
+    deploy:
     docker:
-      - image: node:10.16.0-alpine
+      - image: buildpack-deps:trusty
     steps:
+      - checkout
       - run:
-          name: Deploy the project
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:0a981a8c-8233-4030-90ca-856599387bda@git.heroku.com/pokedex-ts-circleci.git master
+
     filters:
         branches:
           only: master
