@@ -37,7 +37,8 @@ jobs:
 workflows:
   version: 2
   build-deploy:
-    - build
-    - lint
-    - check
-    - test
+    jobs:
+      - build
+      - lint
+      - check
+      - test
