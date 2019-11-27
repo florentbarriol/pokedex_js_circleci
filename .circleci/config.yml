@@ -31,13 +31,13 @@ jobs:
 workflows:
   version: 2
   build-deploy:
-      - build
-      - lint
+    - build
+    - lint:
       requires:
         - build
-      - check
+    - check:
       requires:
         - build
-      - test
+    - test:
       requires:
         - build
