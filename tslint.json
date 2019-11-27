@@ -1,0 +1,23 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-config-airbnb",
+        "tslint-config-prettier",
+        "tslint-plugin-prettier"
+    ],
+    "rules": {
+      "max-classes-per-file": false,
+      "no-use-before-declare": false,
+      "no-console": false,
+      "object-literal-sort-keys": [false, "shorthand-first"],
+      "prettier": [
+        true,
+        {
+          "trailingComma": "all",
+          "singleQuote": true,
+          "printWidth": 160
+        }
+      ]
+    }
+  }
