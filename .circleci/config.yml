@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: node:10.16.0-alpine
     steps:
+        - checkout
         - run:
             name: Install deps
             command: npm install
@@ -34,6 +35,12 @@ jobs:
           command: npm run test
     requires:
           - build
+  deploy:
+    steps:
+      - run:
+          name: Deploy the project
+          command: echo je deploie
+
 workflows:
   version: 2
   build-deploy:
