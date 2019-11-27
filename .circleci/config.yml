@@ -5,39 +5,10 @@ jobs:
       - image: node:10.16.0-alpine
     steps:
         - checkout
-        - run:
-            name: Install deps
-            command: npm install
-
-  lint:
-    docker:
-      - image: node:10.16.0-alpine
-    steps:
-      - run:
-          name: Lint the project
-          command: npm run lint
-    requires:
-      - build
-
-  check:
-    docker:
-      - image: node:10.16.0-alpine
-    steps:
-      - run:
-          name: Check the project
-          command: npm run check
-    requires:
-      - build
-
-  test:
-    docker:
-      - image: node:10.16.0-alpine
-    steps:
-      - run:
-          name: Run the tests
-          command: npm run test
-    requires:
-      - build
+        - run: npm install
+        - run: npm run lint
+        - run: npm run check
+        - run: npm run test
 
   deploy:
     docker:
@@ -54,6 +25,3 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - lint
-      - check
-      - test
