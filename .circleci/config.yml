@@ -19,10 +19,16 @@ jobs:
       - image: node:10.16.0-alpine
     steps:
         - checkout
+        - restore_cache:
+            key: dependency-cache-{{ checksum "package-lock.json" }}
         - run: npm install
         - run: npm run lint
         - run: npm run check
         - run: npm run test
+        - save_cache:
+            key: dependency-cache-{{ checksum "package-lock.json" }}
+            paths:
+              - node_modules
 
   deploy:
     docker:
