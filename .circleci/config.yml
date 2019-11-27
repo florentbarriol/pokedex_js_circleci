@@ -30,7 +30,7 @@ jobs:
           command: npm run test
 workflows:
   version: 2
-  pipeline:
+  build-deploy:
       - build
       - lint
         requires: 
