@@ -20,10 +20,11 @@ jobs:
           command: |
             git push https://heroku:0a981a8c-8233-4030-90ca-856599387bda@git.heroku.com/pokedex-ts-circleci.git master
     requires:
-      - build
+        - build
     filters:
       branches:
-        only: master
+        only: 
+        - master
 
 workflows:
   version: 2
@@ -31,3 +32,4 @@ workflows:
     jobs:
       - build
       - deploy
+        
