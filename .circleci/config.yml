@@ -6,15 +6,15 @@ jobs:
     steps:
         - checkout
         - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+            key: dependency-cache-{{ checksum "package-lock.json" }}
         - run: npm install
         - run: npm run build
         - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
+            key: dependency-cache-{{ checksum "package-lock.json" }}
+            paths:
+              - node_modules
 
-  test:
+  tests:
     docker:
       - image: node:10.16.0-alpine
     steps:
@@ -38,13 +38,13 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - test:
+      - tests:
           requires:
             - build
           filters:
             branches:
               ignore:
-                - master
+              - master
       - deploy:
           requires:
               - build
