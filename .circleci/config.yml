@@ -33,11 +33,11 @@ workflows:
   build-deploy:
       - build
       - lint
-        requires: 
+        requires:
           - build
       - check
-        requires: 
+        requires:
           - build
       - test
-        requires: 
+        requires:
           - build
