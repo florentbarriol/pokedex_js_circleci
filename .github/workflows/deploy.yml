@@ -6,22 +6,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Connect to heroku
-        uses: actions/heroku@master
-        with: 
-          args: "container:login"
+      - name: Release heroku
+        run: |
+          docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+          docker tag docker.pkg.github.com/ebsone/ci-test-mr/webapplication1corenew:latest registry.heroku.com/ci-test-mr/web
+          docker push registry.heroku.com/ci-test-mr/web
+          heroku container:release web -a ci-test-mr
         env:
-          HEROKU_API_KEY: 0a981a8c-8233-4030-90ca-856599387bda
-      - name: Push to heroku
-        uses: actions/heroku@master
-        with:
-          args: "container:push -a pokedex-ts-circleci web"
-        env:
-          HEROKU_API_KEY: 0a981a8c-8233-4030-90ca-856599387bda
-      - name: release
-        uses: actions/heroku@master
-        with:
-          args: "container:release -a pokedex-ts-circleci"
-        env:
-          HEROKU_API_KEY: 0a981a8c-8233-4030-90ca-856599387bda
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       
