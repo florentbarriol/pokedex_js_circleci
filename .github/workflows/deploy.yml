@@ -1,0 +1,17 @@
+name: Deploy the project
+
+on: [pull_request]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release heroku
+        run: |
+          docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+          docker tag docker.pkg.github.com/florentbarriol/pokedex_js_circleci:latest registry.heroku.com/pokedex-ts-circleci/web
+          docker push registry.heroku.com/ci-test-mr/web
+          heroku container:release web -a ci-test-mr
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      
