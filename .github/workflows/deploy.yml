@@ -1,1 +1,27 @@
-name: Deployment
+name: Deploy the project
+
+on: [pull_request]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect to heroku
+        uses: actions/heroku@master
+        with: 
+          args: "container:login"
+        env:
+          HEROKU_API_KEY: 0a981a8c-8233-4030-90ca-856599387bda
+      - name: Push to heroku
+        uses: actions/heroku@master
+        with:
+          args: "container:push -a pokedex-ts-circleci web"
+        env:
+          HEROKU_API_KEY: 0a981a8c-8233-4030-90ca-856599387bda
+      - name: release
+        uses: actions/heroku@master
+        with:
+          args: "container:release -a pokedex-ts-circleci"
+        env:
+          HEROKU_API_KEY: 0a981a8c-8233-4030-90ca-856599387bda
+      
